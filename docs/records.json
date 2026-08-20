@@ -40,7 +40,10 @@
     "land_value": "",
     "stacked": false,
     "score": 10,
-    "notes_internal": "HOA assessment-lien foreclosure, not a mortgage foreclosure -- trustee William D. Crist / Tromberg Miller Morris & Partners"
+    "notes_internal": "HOA assessment-lien foreclosure, not a mortgage foreclosure -- trustee William D. Crist / Tromberg Miller Morris & Partners",
+    "arv_estimate": 274815,
+    "arv_status": "SOLD",
+    "arv_sqft": 1767
   },
   {
     "type": "NOF",
@@ -173,7 +176,10 @@
     "annual_taxes": "",
     "land_value": "",
     "stacked": false,
-    "score": 9
+    "score": 9,
+    "arv_estimate": null,
+    "arv_status": null,
+    "arv_sqft": null
   },
   {
     "type": "NOF",
@@ -214,7 +220,10 @@
     "annual_taxes": "",
     "land_value": "",
     "stacked": false,
-    "score": 9
+    "score": 9,
+    "arv_estimate": null,
+    "arv_status": null,
+    "arv_sqft": null
   },
   {
     "type": "NOF",
@@ -255,7 +264,10 @@
     "annual_taxes": "",
     "land_value": "",
     "stacked": false,
-    "score": 9
+    "score": 9,
+    "arv_estimate": 245000,
+    "arv_status": "FOR_SALE",
+    "arv_sqft": 1895
   },
   {
     "type": "NOF",
@@ -296,7 +308,10 @@
     "annual_taxes": "",
     "land_value": "",
     "stacked": false,
-    "score": 9
+    "score": 9,
+    "arv_estimate": null,
+    "arv_status": null,
+    "arv_sqft": null
   },
   {
     "type": "NOF",
@@ -337,7 +352,10 @@
     "annual_taxes": "",
     "land_value": "",
     "stacked": false,
-    "score": 9
+    "score": 9,
+    "arv_estimate": 344900,
+    "arv_status": "SOLD",
+    "arv_sqft": 3284
   },
   {
     "type": "NOF",
@@ -419,7 +437,10 @@
     "annual_taxes": "",
     "land_value": "",
     "stacked": false,
-    "score": 9
+    "score": 9,
+    "arv_estimate": 185000,
+    "arv_status": "SOLD",
+    "arv_sqft": 1658
   },
   {
     "type": "NOF",
@@ -462,7 +483,10 @@
     "annual_taxes": "",
     "land_value": "",
     "stacked": false,
-    "score": 9
+    "score": 9,
+    "arv_estimate": 62500,
+    "arv_status": "OFF_MARKET",
+    "arv_sqft": 848
   },
   {
     "type": "NOF",
@@ -503,7 +527,10 @@
     "annual_taxes": "",
     "land_value": "",
     "stacked": false,
-    "score": 9
+    "score": 9,
+    "arv_estimate": 199500,
+    "arv_status": "OFF_MARKET",
+    "arv_sqft": 1716
   },
   {
     "type": "NOF",
@@ -544,7 +571,10 @@
     "annual_taxes": "",
     "land_value": "",
     "stacked": false,
-    "score": 9
+    "score": 9,
+    "arv_estimate": 499000,
+    "arv_status": "SOLD",
+    "arv_sqft": 3312
   },
   {
     "type": "NOF",
@@ -585,7 +615,10 @@
     "annual_taxes": "",
     "land_value": "",
     "stacked": false,
-    "score": 9
+    "score": 9,
+    "arv_estimate": 225999,
+    "arv_status": "PENDING",
+    "arv_sqft": 1765
   },
   {
     "type": "NOF",
@@ -626,7 +659,10 @@
     "annual_taxes": "",
     "land_value": "",
     "stacked": false,
-    "score": 8
+    "score": 8,
+    "arv_estimate": 225000,
+    "arv_status": "SOLD",
+    "arv_sqft": 2562
   },
   {
     "type": "NOF",
@@ -667,7 +703,10 @@
     "annual_taxes": "",
     "land_value": "",
     "stacked": false,
-    "score": 8
+    "score": 8,
+    "arv_estimate": 259000,
+    "arv_status": "FOR_SALE",
+    "arv_sqft": 1758
   },
   {
     "type": "NOF",
@@ -707,7 +746,10 @@
     "annual_taxes": "",
     "land_value": "",
     "stacked": false,
-    "score": 8
+    "score": 8,
+    "arv_estimate": 288149,
+    "arv_status": "SOLD",
+    "arv_sqft": 1217
   },
   {
     "type": "NOF",
@@ -747,7 +789,10 @@
     "annual_taxes": "",
     "land_value": "",
     "stacked": false,
-    "score": 8
+    "score": 8,
+    "arv_estimate": 308190,
+    "arv_status": "SOLD",
+    "arv_sqft": 2029
   },
   {
     "type": "NOF",
@@ -787,7 +832,10 @@
     "annual_taxes": "",
     "land_value": "",
     "stacked": false,
-    "score": 8
+    "score": 8,
+    "arv_estimate": null,
+    "arv_status": null,
+    "arv_sqft": null
   },
   {
     "type": "NOF",
@@ -827,7 +875,10 @@
     "annual_taxes": "",
     "land_value": "",
     "stacked": false,
-    "score": 8
+    "score": 8,
+    "arv_estimate": 275000,
+    "arv_status": "SOLD",
+    "arv_sqft": 1568
   },
   {
     "type": "NOF",
@@ -867,7 +918,10 @@
     "annual_taxes": "",
     "land_value": "",
     "stacked": false,
-    "score": 8
+    "score": 8,
+    "arv_estimate": 351100,
+    "arv_status": "OFF_MARKET",
+    "arv_sqft": 2472
   },
   {
     "type": "NOF",
@@ -907,7 +961,10 @@
     "annual_taxes": "",
     "land_value": "",
     "stacked": false,
-    "score": 8
+    "score": 8,
+    "arv_estimate": null,
+    "arv_status": null,
+    "arv_sqft": null
   },
   {
     "type": "NOF",
@@ -947,7 +1004,10 @@
     "annual_taxes": "",
     "land_value": "",
     "stacked": false,
-    "score": 8
+    "score": 8,
+    "arv_estimate": null,
+    "arv_status": null,
+    "arv_sqft": null
   },
   {
     "type": "NOF",
@@ -987,7 +1047,10 @@
     "annual_taxes": "",
     "land_value": "",
     "stacked": false,
-    "score": 8
+    "score": 8,
+    "arv_estimate": 250000,
+    "arv_status": "FOR_SALE",
+    "arv_sqft": 2372
   },
   {
     "type": "NOF",
@@ -1027,7 +1090,10 @@
     "annual_taxes": "",
     "land_value": "",
     "stacked": false,
-    "score": 8
+    "score": 8,
+    "arv_estimate": null,
+    "arv_status": null,
+    "arv_sqft": null
   },
   {
     "type": "NOF",
@@ -1113,9 +1179,9 @@
     "stacked": false,
     "score": 7,
     "notes_internal": "Mortgage foreclosure. Trustee: Nestor Solutions LLC et al.",
-    "arv_estimate": 280000,
-    "arv_status": "OFF_MARKET",
-    "arv_sqft": 1700
+    "arv_estimate": null,
+    "arv_status": null,
+    "arv_sqft": null
   },
   {
     "type": "NOF",
@@ -1156,7 +1222,10 @@
     "land_value": "",
     "stacked": false,
     "score": 7,
-    "notes_internal": "Mortgage foreclosure -- original loan amount stated directly in notice ($199,975.00), rare for these filings."
+    "notes_internal": "Mortgage foreclosure -- original loan amount stated directly in notice ($199,975.00), rare for these filings.",
+    "arv_estimate": null,
+    "arv_status": null,
+    "arv_sqft": null
   },
   {
     "type": "NOF",
@@ -1241,6 +1310,9 @@
     "land_value": "",
     "stacked": false,
     "score": 7,
-    "notes_internal": "CAVEAT: notice states 'SUBJECT PROPERTY LIES WHOLLY WITHIN COMAL COUNTY' -- posted on Guadalupe's site but the property itself is in Comal County, not Guadalupe. Recorded in Comal County (Vol 201106028135)."
+    "notes_internal": "CAVEAT: notice states 'SUBJECT PROPERTY LIES WHOLLY WITHIN COMAL COUNTY' -- posted on Guadalupe's site but the property itself is in Comal County, not Guadalupe. Recorded in Comal County (Vol 201106028135).",
+    "arv_estimate": null,
+    "arv_status": null,
+    "arv_sqft": null
   }
 ]
