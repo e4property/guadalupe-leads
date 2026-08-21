@@ -1,0 +1,42 @@
+name: On-Market Check
+
+on:
+  schedule:
+    - cron: '0 13 * * 1'   # weekly, Monday 8am CDT (13:00 UTC)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  on-market:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install homeharvest
+
+      - name: Run on-market check
+        run: python scraper/on_market.py
+
+      - name: Commit results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/records.json
+          git diff --cached --quiet && echo "No changes" && exit 0
+          git commit -m "on-market: $(date -u +'%Y-%m-%d') status check"
+          for i in 1 2 3; do
+            git fetch origin main
+            git rebase -X theirs origin/main || git rebase --abort
+            git push origin main && echo "Push succeeded" && break
+            echo "Push attempt $i failed, retrying..."
+            sleep 3
+          done
