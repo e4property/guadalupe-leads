@@ -43,7 +43,10 @@
     "notes_internal": "HOA assessment-lien foreclosure, not a mortgage foreclosure -- trustee William D. Crist / Tromberg Miller Morris & Partners",
     "arv_estimate": 274815,
     "arv_status": "SOLD",
-    "arv_sqft": 1767
+    "arv_sqft": 1767,
+    "on_market": false,
+    "on_market_status": "SOLD",
+    "on_market_checked_at": "2026-08-21T16:59:00Z"
   },
   {
     "type": "NOF",
@@ -89,7 +92,10 @@
     "notes_internal": "HOA assessment-lien foreclosure, not a mortgage foreclosure -- trustee William D. Crist, dated 8/10/2026",
     "arv_estimate": 252900,
     "arv_status": "SOLD",
-    "arv_sqft": 1474
+    "arv_sqft": 1474,
+    "on_market": false,
+    "on_market_status": "SOLD",
+    "on_market_checked_at": "2026-08-21T16:59:02Z"
   },
   {
     "type": "NOF",
@@ -135,7 +141,10 @@
     "notes_internal": "HOA assessment-lien foreclosure, not a mortgage foreclosure -- same Voss Farms HOA as the two leads above",
     "arv_estimate": 388600,
     "arv_status": "SOLD",
-    "arv_sqft": 2653
+    "arv_sqft": 2653,
+    "on_market": false,
+    "on_market_status": "SOLD",
+    "on_market_checked_at": "2026-08-21T16:59:03Z"
   },
   {
     "type": "NOF",
@@ -179,7 +188,10 @@
     "score": 9,
     "arv_estimate": null,
     "arv_status": null,
-    "arv_sqft": null
+    "arv_sqft": null,
+    "on_market": false,
+    "on_market_status": "OFF_MARKET",
+    "on_market_checked_at": "2026-08-21T16:59:05Z"
   },
   {
     "type": "NOF",
@@ -223,7 +235,10 @@
     "score": 9,
     "arv_estimate": null,
     "arv_status": null,
-    "arv_sqft": null
+    "arv_sqft": null,
+    "on_market": true,
+    "on_market_status": "FOR_RENT",
+    "on_market_checked_at": "2026-08-21T16:59:46Z"
   },
   {
     "type": "NOF",
@@ -267,7 +282,10 @@
     "score": 9,
     "arv_estimate": 245000,
     "arv_status": "FOR_SALE",
-    "arv_sqft": 1895
+    "arv_sqft": 1895,
+    "on_market": true,
+    "on_market_status": "FOR_SALE",
+    "on_market_checked_at": "2026-08-21T16:59:48Z"
   },
   {
     "type": "NOF",
@@ -311,7 +329,10 @@
     "score": 9,
     "arv_estimate": null,
     "arv_status": null,
-    "arv_sqft": null
+    "arv_sqft": null,
+    "on_market": true,
+    "on_market_status": "FOR_RENT",
+    "on_market_checked_at": "2026-08-21T17:00:30Z"
   },
   {
     "type": "NOF",
@@ -355,7 +376,10 @@
     "score": 9,
     "arv_estimate": 344900,
     "arv_status": "SOLD",
-    "arv_sqft": 3284
+    "arv_sqft": 3284,
+    "on_market": false,
+    "on_market_status": "SOLD",
+    "on_market_checked_at": "2026-08-21T17:00:31Z"
   },
   {
     "type": "NOF",
@@ -396,7 +420,10 @@
     "annual_taxes": "",
     "land_value": "",
     "stacked": false,
-    "score": 9
+    "score": 9,
+    "on_market": false,
+    "on_market_status": "SOLD",
+    "on_market_checked_at": "2026-08-21T17:00:33Z"
   },
   {
     "type": "NOF",
@@ -440,7 +467,10 @@
     "score": 9,
     "arv_estimate": 185000,
     "arv_status": "SOLD",
-    "arv_sqft": 1658
+    "arv_sqft": 1658,
+    "on_market": false,
+    "on_market_status": "SOLD",
+    "on_market_checked_at": "2026-08-21T17:00:34Z"
   },
   {
     "type": "NOF",
@@ -486,7 +516,10 @@
     "score": 9,
     "arv_estimate": 62500,
     "arv_status": "OFF_MARKET",
-    "arv_sqft": 848
+    "arv_sqft": 848,
+    "on_market": false,
+    "on_market_status": "OFF_MARKET",
+    "on_market_checked_at": "2026-08-21T17:00:36Z"
   },
   {
     "type": "NOF",
@@ -530,7 +563,10 @@
     "score": 9,
     "arv_estimate": 199500,
     "arv_status": "OFF_MARKET",
-    "arv_sqft": 1716
+    "arv_sqft": 1716,
+    "on_market": false,
+    "on_market_status": "OFF_MARKET",
+    "on_market_checked_at": "2026-08-21T17:00:38Z"
   },
   {
     "type": "NOF",
@@ -574,7 +610,10 @@
     "score": 9,
     "arv_estimate": 499000,
     "arv_status": "SOLD",
-    "arv_sqft": 3312
+    "arv_sqft": 3312,
+    "on_market": false,
+    "on_market_status": "SOLD",
+    "on_market_checked_at": "2026-08-21T17:00:39Z"
   },
   {
     "type": "NOF",
@@ -618,7 +657,10 @@
     "score": 9,
     "arv_estimate": 225999,
     "arv_status": "PENDING",
-    "arv_sqft": 1765
+    "arv_sqft": 1765,
+    "on_market": true,
+    "on_market_status": "PENDING",
+    "on_market_checked_at": "2026-08-21T17:00:41Z"
   },
   {
     "type": "NOF",
@@ -662,7 +704,10 @@
     "score": 8,
     "arv_estimate": 225000,
     "arv_status": "SOLD",
-    "arv_sqft": 2562
+    "arv_sqft": 2562,
+    "on_market": false,
+    "on_market_status": "SOLD",
+    "on_market_checked_at": "2026-08-21T17:00:42Z"
   },
   {
     "type": "NOF",
@@ -706,7 +751,10 @@
     "score": 8,
     "arv_estimate": 259000,
     "arv_status": "FOR_SALE",
-    "arv_sqft": 1758
+    "arv_sqft": 1758,
+    "on_market": true,
+    "on_market_status": "FOR_SALE",
+    "on_market_checked_at": "2026-08-21T17:00:44Z"
   },
   {
     "type": "NOF",
@@ -749,7 +797,10 @@
     "score": 8,
     "arv_estimate": 288149,
     "arv_status": "SOLD",
-    "arv_sqft": 1217
+    "arv_sqft": 1217,
+    "on_market": false,
+    "on_market_status": "SOLD",
+    "on_market_checked_at": "2026-08-21T17:00:45Z"
   },
   {
     "type": "NOF",
@@ -792,7 +843,10 @@
     "score": 8,
     "arv_estimate": 308190,
     "arv_status": "SOLD",
-    "arv_sqft": 2029
+    "arv_sqft": 2029,
+    "on_market": false,
+    "on_market_status": "SOLD",
+    "on_market_checked_at": "2026-08-21T17:00:47Z"
   },
   {
     "type": "NOF",
@@ -835,7 +889,10 @@
     "score": 8,
     "arv_estimate": null,
     "arv_status": null,
-    "arv_sqft": null
+    "arv_sqft": null,
+    "on_market": true,
+    "on_market_status": "FOR_RENT",
+    "on_market_checked_at": "2026-08-21T17:01:27Z"
   },
   {
     "type": "NOF",
@@ -878,7 +935,10 @@
     "score": 8,
     "arv_estimate": 275000,
     "arv_status": "SOLD",
-    "arv_sqft": 1568
+    "arv_sqft": 1568,
+    "on_market": true,
+    "on_market_status": "FOR_SALE",
+    "on_market_checked_at": "2026-08-21T17:02:09Z"
   },
   {
     "type": "NOF",
