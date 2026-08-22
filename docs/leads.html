@@ -1152,7 +1152,14 @@ function renderItem(lead,idx){
 
 function selectLead(doc){selectedDoc=doc;selectedIdx=filteredLeads.findIndex(l=>l.doc_number===doc);const lead=allLeads.find(l=>l.doc_number===doc);if(!lead)return;if(currentNavView==='dash')showView('work');renderList();populateDetail(lead);}
 
-function parseName(owner){if(!owner||!owner.trim())return{first:'',last:''};let c=owner.replace(/\s*&\s*$/,'').trim();if(c.includes('&'))c=c.split('&')[0].trim();c=c.replace(/\b(JR|SR|II|III|IV|V|EST OF|C\/T|ETAL|C\/O)\b/gi,'').replace(/\s+/g,' ').trim();const p=c.split(/\s+/).filter(Boolean);if(!p.length)return{first:'',last:''};if(p.length===1)return{first:toTitle(p[0]),last:''};return{first:toTitle(p.slice(1).join(' ')),last:toTitle(p[0])};}
+// 2026-08-22: Guadalupe owner names come in "First Last and First Last"
+// order (e.g. "Ivan Valdivia and Karen Alexa Alvarez Padilla"), not the
+// "LASTNAME FIRSTNAME &" county-record order Bexar/Nueces use -- the old
+// version of this function was copy-pasted from those and produced
+// garbage like first="Valdivia And Karen...Padilla Ivan", last="Ivan" on
+// real Guadalupe leads. Splits on "and"/"&" to take just the first person,
+// then reads first-token=first name, last-token=last name.
+function parseName(owner){if(!owner||!owner.trim())return{first:'',last:''};let c=owner.trim();c=c.split(/\s+and\s+/i)[0].trim();if(c.includes('&'))c=c.split('&')[0].trim();c=c.replace(/\(.*?\)/g,'').trim();c=c.replace(/\b(JR|SR|II|III|IV|V|EST OF|C\/T|ETAL|C\/O)\b\.?/gi,'').replace(/\s+/g,' ').trim();const p=c.split(/\s+/).filter(Boolean);if(!p.length)return{first:'',last:''};if(p.length===1)return{first:toTitle(p[0]),last:''};return{first:toTitle(p[0]),last:toTitle(p[p.length-1])};}
 function fmtDate(raw){if(!raw)return'—';raw=raw.trim();const mdy=raw.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);if(mdy){const d=new Date(+mdy[3],+mdy[1]-1,+mdy[2]);return d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});}const my=raw.match(/^(\d{1,2})\/(\d{4})$/);if(my){const d=new Date(+my[2],+my[1]-1,1);return d.toLocaleDateString('en-US',{month:'short',year:'numeric'});}const iso=raw.match(/^(\d{4})-(\d{2})-(\d{2})/);if(iso){const d=new Date(+iso[1],+iso[2]-1,+iso[3]);return d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});}return raw;}
 function toTitle(s){return s.toLowerCase().replace(/\b\w/g,c=>c.toUpperCase());}
 function getCity(r){if(r.absentee&&r.mail_addr){const p=r.mail_addr.trim().split(/\s+/);for(let i=p.length-2;i>=0;i--){if(/^[A-Z]{2,}$/.test(p[i]))return toTitle(p[i]);}}return toTitle(r.city||'');}
