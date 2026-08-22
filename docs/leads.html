@@ -1493,7 +1493,7 @@ async function pushGHL(lead,phone){
   // seller) -- a Guadalupe bot flow is a separate piece of work.
   const baseTags=appt?['forewarn_searched']:['guadalupe_lead','forewarn_searched'];
   const tags=[...baseTags,ghlTag];
-  if(stacked){tags.push('guadalupe_stacked','guadalupe_vbp','guadalupe_ce');if(isVBPDangerous(lead))tags.push('ce_dangerous');}else if(vbp)tags.push('guadalupe_vbp');else if(ce){tags.push('guadalupe_ce');if(lead.flags?.includes('DANGEROUS PREMISES'))tags.push('ce_dangerous');}else if(lp)tags.push('guadalupe_lp');else if(appt){/* guadalupe_prefore already added via ghlTag above */}else{tags.push('guadalupe-contacted');if(lead.absentee)tags.push('absentee');if(lead.type==='TAX')tags.push('tax_foreclosure');if(lead.is_new)tags.push('new_lead');}if(isLongHeld(lead))tags.push('long_held');
+  if(stacked){tags.push('guadalupe_stacked','guadalupe_vbp','guadalupe_ce');if(isVBPDangerous(lead))tags.push('ce_dangerous');}else if(vbp)tags.push('guadalupe_vbp');else if(ce){tags.push('guadalupe_ce');if(lead.flags?.includes('DANGEROUS PREMISES'))tags.push('ce_dangerous');}else if(lp)tags.push('guadalupe_lp');else if(appt){/* guadalupe_prefore already added via ghlTag above */}else{tags.push('guadalupe-contacted');if(lead.absentee)tags.push('absentee');if(lead.type==='TAX')tags.push('tax_foreclosure');if(lead.is_new)tags.push('new_lead');}if(isLongHeld(lead))tags.push('long_held');if(lead.tenure_years!=null&&lead.tenure_years<=4)tags.push('low_tenure_lead');
   // Bot-offer bracket, ported from bexar-leads 2026-08-20: primary path is
   // marking a lead (mao-mark-offer checkbox, only shown pre-push) BEFORE
   // pushing -- if marked, the range computed from the currently-open lead's
