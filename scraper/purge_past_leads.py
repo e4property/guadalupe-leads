@@ -23,6 +23,12 @@ log = logging.getLogger(__name__)
 RECORDS_PATH = Path("docs/records.json")
 TODAY = datetime.now()
 
+# v1.1: "if we haven't worked them by now, it's too late" -- user's own
+# words, 2026-08-26, matching the same standing rule added to Nueces's
+# purge_past_auctions() the same day. An unworked lead this close to its
+# own auction is dead the same way a past auction is.
+TOO_SOON_TO_WORK_DAYS = 5
+
 
 def parse_date(s):
     if not s:
@@ -43,6 +49,8 @@ def should_purge(rec):
     dt = parse_date(rec.get("sale_date", ""))
     if dt and dt < TODAY:
         return True, f"auction_passed ({rec['sale_date']})"
+    if dt and 0 <= (dt - TODAY).days <= TOO_SOON_TO_WORK_DAYS:
+        return True, f"too_soon_to_work ({rec['sale_date']})"
     return False, "keep"
 
 
