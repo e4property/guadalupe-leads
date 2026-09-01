@@ -16,12 +16,20 @@ import json
 import logging
 from datetime import datetime
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 log = logging.getLogger(__name__)
 
 RECORDS_PATH = Path("docs/records.json")
-TODAY = datetime.now()
+# 2026-09-01: TODAY = datetime.now() used the local/runner clock rather
+# than Central time -- confirmed live in bexar-leads this class of bug
+# purged 418 leads the instant UTC crossed midnight into a sale date,
+# hours before that date started in Central time. Guadalupe's own
+# has_ghl_activity() check would have protected worked leads either way,
+# but unworked leads could still have been dropped a day early. Use
+# Central time and compare calendar dates only (see should_purge below).
+TODAY = datetime.now(ZoneInfo("America/Chicago")).replace(tzinfo=None)
 
 # v1.1: "if we haven't worked them by now, it's too late" -- user's own
 # words, 2026-08-26, matching the same standing rule added to Nueces's
@@ -47,9 +55,9 @@ def should_purge(rec):
     if has_ghl_activity(rec):
         return False, "has_ghl_activity"
     dt = parse_date(rec.get("sale_date", ""))
-    if dt and dt < TODAY:
+    if dt and dt.date() < TODAY.date():
         return True, f"auction_passed ({rec['sale_date']})"
-    if dt and 0 <= (dt - TODAY).days <= TOO_SOON_TO_WORK_DAYS:
+    if dt and 0 <= (dt.date() - TODAY.date()).days <= TOO_SOON_TO_WORK_DAYS:
         return True, f"too_soon_to_work ({rec['sale_date']})"
     return False, "keep"
 
