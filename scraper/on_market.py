@@ -7,8 +7,16 @@ Guadalupe has no automated county scraper (leads are added manually), so
 this runs as its own small standalone job against docs/records.json rather
 than being a step inside a larger fetch.py pipeline.
 
+2026-08-31: also fills arv_estimate/arv_sqft/arv_status and appraised_value
+from the SAME scrape_property() row this script already fetches per lead --
+Guadalupe has no CAD/appraisal-district enrichment (unlike Bexar/Nueces), so
+this is the only ARV/appraised signal available for this county, and the
+existing values on older leads were a one-off manual pass rather than a
+repeating job. Piggybacking here means no second network call per lead and
+no separate rate-limit budget to manage.
+
 Soft dependency: any failure (network, no match, library error) just leaves
-on_market unset for that lead rather than breaking the run.
+these fields unset for that lead rather than breaking the run.
 """
 import json
 import time
@@ -78,14 +86,38 @@ def main():
                 print(f"  [{rec.get('doc_number')}] {full_addr}: no match on Realtor.com")
                 continue
 
-            status = clean(df.iloc[0].get("status")) or ""
+            row = df.iloc[0]
+            status = clean(row.get("status")) or ""
             rec["on_market"]            = status in ON_MARKET_STATUSES
             rec["on_market_status"]     = status
             rec["on_market_checked_at"] = now_iso
 
+            # ARV: prefer Realtor.com's own estimate, fall back through the
+            # price fields that are actually populated for that listing type
+            # (a SOLD listing usually has sold/last-sold price but no
+            # estimated_value; an active FOR_SALE listing usually has
+            # list_price). Confirmed live 2026-08-31: for a FOR_RENT listing,
+            # list_price is a rent figure, not a sale value -- 425 Riley St
+            # came back arv=$36,000 this way, wildly out of line with every
+            # other lead. Only trust list_price as a value proxy when the
+            # listing is actually for sale.
+            arv = clean(row.get("estimated_value")) or clean(row.get("sold_price")) \
+                or clean(row.get("last_sold_price"))
+            if not arv and status != "FOR_RENT":
+                arv = clean(row.get("list_price"))
+            if arv:
+                rec["arv_estimate"] = int(float(arv))
+                rec["arv_status"]   = status
+            sqft = clean(row.get("sqft"))
+            if sqft:
+                rec["arv_sqft"] = int(float(sqft))
+            assessed = clean(row.get("assessed_value"))
+            if assessed and not rec.get("appraised_value"):
+                rec["appraised_value"] = str(int(float(assessed)))
+
             if rec["on_market"] != was_on_market:
                 changed += 1
-            print(f"  [{rec.get('doc_number')}] {full_addr}: status={status} on_market={rec['on_market']}")
+            print(f"  [{rec.get('doc_number')}] {full_addr}: status={status} on_market={rec['on_market']} arv={rec.get('arv_estimate')}")
         except Exception as e:
             print(f"  [{rec.get('doc_number')}] {full_addr}: error: {e}")
             errors += 1
