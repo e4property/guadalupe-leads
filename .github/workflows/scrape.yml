@@ -1,0 +1,47 @@
+name: Scrape and Deploy
+
+on:
+  schedule:
+    - cron: '0 14 3-9 * 2'   # first Tuesday of each month, 9am CDT (14:00 UTC) -- day after the county typically finishes posting that date's compiled PDF
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  scrape-and-deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install pdfplumber
+
+      - name: Run scraper
+        run: python scraper/fetch.py
+
+      - name: Purge past-sale leads
+        run: python scraper/purge_past_leads.py
+
+      - name: Commit results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/records.json
+          git diff --cached --quiet && echo "No changes" && exit 0
+          git commit -m "scrape: $(date -u +'%Y-%m-%d') Guadalupe notice PDFs"
+          for i in 1 2 3; do
+            git fetch origin main
+            git rebase -X theirs origin/main || git rebase --abort
+            git push origin main && echo "Push succeeded" && break
+            echo "Push attempt $i failed, retrying..."
+            sleep 3
+          done
