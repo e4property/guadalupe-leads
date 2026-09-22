@@ -72,6 +72,10 @@ FILE_NO_RE = re.compile(r"File\s+No\.?:?\s*([A-Z0-9-]{5,20})", re.IGNORECASE)
 
 GRANTOR_A_RE = re.compile(r"with\s+([A-Z][A-Z0-9 ,.&'\-]{3,90}?),?\s+grantor\(s\)", re.IGNORECASE)
 GRANTOR_B_RE = re.compile(r"Grantor\(s\)/Mortgagor\(s\):\s*\n?([A-Z][A-Za-z0-9 ,.&'\-\n]{3,90}?)\n\s*(?:Original\s+Beneficiary|Recorded\s+in)", re.IGNORECASE)
+# 2026-09-22: a third template -- confirmed live on doc 202199004170 (Carlton
+# Ray Creasy) -- uses a "Trustor(s): NAME, Original Beneficiary: ..." table
+# label instead of "with X, grantor(s)" or "Grantor(s)/Mortgagor(s): X".
+GRANTOR_C_RE = re.compile(r"Trustor\(s\):\s*([A-Z][A-Za-z0-9 ,.&'\-]{3,90}?),?\s*Original", re.IGNORECASE)
 
 MORTGAGEE_A_RE = re.compile(r"([A-Z][A-Za-z0-9 ,.&'\-]{3,80}?)\s+is\s+the\s+current\s+mortgagee", re.IGNORECASE)
 MORTGAGEE_B_RE = re.compile(r"Current\s+Beneficiary/Mortgagee:\s*\n?([A-Za-z][A-Za-z0-9 ,.&'\-\n]{3,90}?)\n\s*(?:Recorded\s+in|Mortgage\s+Servicer)", re.IGNORECASE)
@@ -197,6 +201,9 @@ def extract_owner(block):
     m = GRANTOR_B_RE.search(block)
     if m:
         return re.sub(r"\s+", " ", m.group(1)).strip().rstrip(",")
+    m = GRANTOR_C_RE.search(block)
+    if m:
+        return re.sub(r"\s+", " ", m.group(1)).strip().rstrip(",")
     return ""
 
 
@@ -284,26 +291,62 @@ def norm_addr(rec):
 
 def load_known_docs():
     if not RECORDS_PATH.exists():
-        return set(), set(), []
+        return {}, set(), {}, []
     prev = json.loads(RECORDS_PATH.read_text(encoding="utf-8"))
-    known_docs = {r.get("doc_number") for r in prev}
+    # 2026-09-22: used to be a bare set of doc_numbers -- once a doc_number
+    # was seen once, it was skipped forever, even if owner/address/loan_amount
+    # all came back blank that first time (e.g. a grantor-label format
+    # extract_owner() didn't cover yet, added later). Confirmed live on doc
+    # 202199004170 (Carlton Ray Creasy): loan_amount is plainly extractable
+    # ($164,244.00, right there in the PDF body) but stayed blank on the
+    # dashboard indefinitely because this doc_number was already "known".
+    # Now a dict keyed by doc_number so main() can tell complete from
+    # incomplete and only skip the former.
+    known_docs = {r.get("doc_number"): r for r in prev if r.get("doc_number")}
     # The pre-existing manually-seeded records (source=guadalupe_pdf_manual)
-    # use their own doc-number scheme (transcribed TS-/case IDs) that never
-    # matches this script's own doc numbers, so doc_number alone missed 21
-    # of 37 as true duplicates on a live test run (2026-09-18) -- same
-    # address+sale_date already covered by a manual entry, re-added as a
-    # "new" auto entry with none of that record's existing ARV/ghl_pushed
-    # enrichment. Guard on (address, sale_date) too.
+    # use their own doc-number scheme (transcribed TS-/case IDs, e.g.
+    # "CCFile-202199004170") that never matches this script's own doc
+    # numbers (build_record() would produce "202199004170", no prefix) --
+    # doc_number alone missed 21 of 37 as true duplicates on a live test run
+    # (2026-09-18) -- same address+sale_date already covered by a manual
+    # entry, re-added as a "new" auto entry with none of that record's
+    # existing ARV/ghl_pushed enrichment. Guard on (address, sale_date) too,
+    # and -- 2026-09-22 -- also use it as the backfill lookup key for exactly
+    # these manually-seeded records, since doc_number will never match them.
     known_addrs = {norm_addr(r) for r in prev if norm_addr(r)}
-    return known_docs, known_addrs, prev
+    known_by_addr = {norm_addr(r): r for r in prev if norm_addr(r)}
+    return known_docs, known_addrs, known_by_addr, prev
+
+
+# Fields build_record() actually produces from the PDF text -- safe to
+# backfill into an existing incomplete record. Never touches dashboard-owned
+# fields (ghl_pushed, dash_phone, arv_estimate, on_market*, notes, etc.).
+SCRAPER_OWNED_FIELDS = ["owner", "address", "city", "zip", "lender", "loan_amount"]
+
+
+def record_complete(r):
+    return bool(r.get("owner") and r.get("address") and r.get("loan_amount"))
+
+
+def backfill(existing, rec):
+    """Fill blank scraper-owned fields on an existing record from a fresh
+    parse. Never touches dashboard-owned fields. Returns the list of field
+    names actually changed."""
+    changed = []
+    for field in SCRAPER_OWNED_FIELDS:
+        if not existing.get(field) and rec.get(field):
+            existing[field] = rec[field]
+            changed.append(field)
+    return changed
 
 
 def main():
-    known_docs, known_addrs, prev_records = load_known_docs()
+    known_docs, known_addrs, known_by_addr, prev_records = load_known_docs()
     new_records = []
     skipped_dupe_addr = 0
     total_blocks = 0
     addr_hits = 0
+    backfilled = 0
 
     for sale_date in upcoming_sale_dates():
         pdf_bytes, url = download_pdf(sale_date)
@@ -317,9 +360,18 @@ def main():
 
         for idx, block in enumerate(blocks):
             rec = build_record(block, sale_date, idx)
-            if rec["doc_number"] in known_docs:
-                continue
             na = norm_addr(rec)
+            existing = known_docs.get(rec["doc_number"]) or (known_by_addr.get(na) if na else None)
+            if existing is not None:
+                if not record_complete(existing):
+                    # backfill in place -- never touch dashboard-owned
+                    # fields (ghl_pushed, dash_phone, arv_estimate,
+                    # on_market*, notes, etc.)
+                    changed = backfill(existing, rec)
+                    if changed:
+                        backfilled += 1
+                        log.info(f"  backfilled {existing.get('doc_number')}: {', '.join(changed)}")
+                continue
             if na and na in known_addrs:
                 # covers both "already in records.json" and "already added
                 # earlier in this same run" (e.g. one real notice that this
@@ -330,7 +382,7 @@ def main():
                 continue
             if rec["address"]:
                 addr_hits += 1
-            known_docs.add(rec["doc_number"])
+            known_docs[rec["doc_number"]] = rec
             if na:
                 known_addrs.add(na)
             new_records.append(rec)
@@ -338,15 +390,17 @@ def main():
     log.info(f"ADDRESS extraction: {addr_hits}/{len(new_records)} new notices yielded a street address "
               f"(out of {total_blocks} total notices seen across all sale-date PDFs)")
     log.info(f"Skipped {skipped_dupe_addr} notices already covered by an existing record (same address+sale_date)")
+    log.info(f"Backfilled {backfilled} existing incomplete record(s) with fields this run could now extract")
 
     for r in new_records:
         r.pop("_addr_source", None)
 
     # drop past-sale-date prev records the same way purge_past_leads.py would on next run;
     # just append new ones here, purge runs separately per repo convention.
+    # prev_records entries were mutated in place above for any backfills.
     all_records = prev_records + new_records
     RECORDS_PATH.write_text(json.dumps(all_records, indent=2), encoding="utf-8")
-    print(f"new={len(new_records)}")
+    print(f"new={len(new_records)} backfilled={backfilled}")
 
 
 if __name__ == "__main__":
