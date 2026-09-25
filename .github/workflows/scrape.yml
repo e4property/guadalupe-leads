@@ -23,7 +23,7 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install pdfplumber
+        run: pip install pdfplumber homeharvest pandas
 
       - name: Run scraper
         run: python scraper/fetch.py
