@@ -911,7 +911,7 @@
     "arv_sqft": 1472,
     "on_market": false,
     "on_market_status": "SOLD",
-    "on_market_checked_at": "2026-08-31T19:17:44Z"
+    "on_market_checked_at": "2026-09-25T14:47:43Z"
   },
   {
     "type": "NOF",
@@ -958,7 +958,7 @@
     "arv_sqft": 2201,
     "on_market": true,
     "on_market_status": "FOR_SALE",
-    "on_market_checked_at": "2026-08-31T19:18:26Z",
+    "on_market_checked_at": "2026-09-25T14:47:50Z",
     "ghl_pushed": true,
     "ghl_pushed_at": "2026-09-22T18:00:36.850Z",
     "ghl_id": "cXg1mFBFocwZNzJ77CFc"
@@ -1008,7 +1008,7 @@
     "arv_sqft": 2266,
     "on_market": false,
     "on_market_status": "SOLD",
-    "on_market_checked_at": "2026-08-31T19:18:28Z"
+    "on_market_checked_at": "2026-09-25T14:47:51Z"
   },
   {
     "type": "NOF",
@@ -1055,7 +1055,7 @@
     "arv_sqft": 1675,
     "on_market": true,
     "on_market_status": "FOR_SALE",
-    "on_market_checked_at": "2026-08-31T19:18:29Z"
+    "on_market_checked_at": "2026-09-25T14:47:53Z"
   },
   {
     "type": "NOF",
@@ -1102,7 +1102,7 @@
     "arv_sqft": 2652,
     "on_market": false,
     "on_market_status": "SOLD",
-    "on_market_checked_at": "2026-08-31T19:18:31Z"
+    "on_market_checked_at": "2026-09-25T14:47:54Z"
   },
   {
     "type": "NOF",
@@ -1149,7 +1149,7 @@
     "arv_sqft": 1574,
     "on_market": false,
     "on_market_status": "OFF_MARKET",
-    "on_market_checked_at": "2026-08-31T19:18:32Z"
+    "on_market_checked_at": "2026-09-25T14:47:56Z"
   },
   {
     "type": "NOF",
@@ -1196,7 +1196,7 @@
     "arv_sqft": 1687,
     "on_market": true,
     "on_market_status": "FOR_SALE",
-    "on_market_checked_at": "2026-08-31T19:18:34Z"
+    "on_market_checked_at": "2026-09-25T14:47:57Z"
   },
   {
     "type": "NOF",
@@ -1243,7 +1243,7 @@
     "arv_sqft": 2402,
     "on_market": false,
     "on_market_status": "OFF_MARKET",
-    "on_market_checked_at": "2026-08-31T19:18:35Z"
+    "on_market_checked_at": "2026-09-25T14:47:58Z"
   },
   {
     "type": "NOF",
@@ -1289,7 +1289,7 @@
     "arv_sqft": "",
     "on_market": true,
     "on_market_status": "FOR_RENT",
-    "on_market_checked_at": "2026-09-07T17:58:43Z",
+    "on_market_checked_at": "2026-09-25T14:48:01Z",
     "ghl_pushed": false,
     "ghl_pushed_at": "",
     "ghl_id": ""
@@ -1338,7 +1338,7 @@
     "arv_sqft": 2245,
     "on_market": false,
     "on_market_status": "SOLD",
-    "on_market_checked_at": "2026-09-07T17:58:45Z",
+    "on_market_checked_at": "2026-09-25T14:48:03Z",
     "ghl_pushed": false,
     "ghl_pushed_at": "",
     "ghl_id": ""
