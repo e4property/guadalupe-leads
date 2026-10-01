@@ -30,6 +30,7 @@ import json
 import logging
 import re
 import time
+import urllib.parse
 import urllib.request
 from datetime import datetime, timedelta
 from pathlib import Path
@@ -54,6 +55,19 @@ ON_MARKET_REFRESH_LIMIT = 10   # max already-checked leads to re-check per run
 
 PAGE_IDS = ["5894", "7450"]  # county has switched the page id at least once (see 7450_0_2027-01-05 in scratch cache)
 BASE = "https://www.guadalupetx.gov/page/open"
+
+# 2026-10-01: Guadalupe CAD's live parcel database, found by reading the
+# config behind their public GIS viewer (gis.bisclient.com/guadalupecad,
+# an Esri Web AppBuilder app) -- its webmap (item 3230b16cebd24e5ea5436b1
+# ee0c728e4 on guadalupecad.maps.arcgis.com) points at this ArcGIS Online
+# hosted feature service. Confirmed live: capabilities include Query, no
+# auth needed, 100,235 real parcels. Same vendor family as bexar-leads'
+# TrueAutomation source. See enrich_from_gcad() below.
+GCAD_PARCELS_URL = (
+    "https://utility.arcgis.com/usrsvcs/servers/"
+    "4a5a0e55fa144e5e966a7a937c925aca/rest/services/"
+    "GuadalupeCADWebService/FeatureServer/0/query"
+)
 
 CITY_RE = r"(NEW\s+BRAUNFELS|SAN\s+ANTONIO|SEGUIN|CIBOLO|SCHERTZ|SELMA|MARION|MCQUEENEY|KINGSBURY|ZUEHL)"
 
@@ -88,6 +102,23 @@ GRANTOR_C_RE = re.compile(r"Trustor\(s\):\s*([A-Z][A-Za-z0-9 ,.&'\-]{3,90}?),?\s
 
 MORTGAGEE_A_RE = re.compile(r"([A-Z][A-Za-z0-9 ,.&'\-]{3,80}?)\s+is\s+the\s+current\s+mortgagee", re.IGNORECASE)
 MORTGAGEE_B_RE = re.compile(r"Current\s+Beneficiary/Mortgagee:\s*\n?([A-Za-z][A-Za-z0-9 ,.&'\-\n]{3,90}?)\n\s*(?:Recorded\s+in|Mortgage\s+Servicer)", re.IGNORECASE)
+
+# 2026-10-01: GCAD enrichment -- most notices give a platted "LOT X, BLOCK Y,
+# [SUBDIVISION NAME]" legal description even when no street address appears
+# anywhere else in the notice (confirmed live against real cached PDFs:
+# "LOT 89, BLOCK 8, LAUBACH SUBDIVISION UNIT 4A...", "LOT 2, BLOCK 10, OF
+# HANNAH HEIGHTS SUBDIVISION, UNIT 6..."). Guadalupe CAD's own parcel
+# database stores tract_or_lot/block as separate plain fields (e.g. "907"/
+# "3"), so lot+block is enough to look the parcel up directly -- see
+# enrich_from_gcad() below. Doesn't catch metes-and-bounds-only
+# descriptions (acreage parcels with no lot/block at all) -- those stay
+# NO ADDRESS for now, same as before.
+LOT_BLOCK_RE = re.compile(
+    r"LOT\s+([0-9A-Z]{1,6}),?\s+BLOCK\s+([0-9A-Za-z]{1,6}),?\s+(?:OF\s+)?"
+    r"([A-Z][A-Za-z0-9 .'&-]{2,60}?)(?:,?\s+UNIT\s+[0-9A-Za-z]+)?\s*,?\s*"
+    r"(?:A(?:N)?\s+)?(?:SUBDIVISION|ADDITION)",
+    re.IGNORECASE,
+)
 
 NOTICE_START_RE = re.compile(r"NOTICE\s+OF\s+(?:\[?SUBSTITUTE\]?\s*)?TRUSTEE'?S?\s+SALE|NOTICE\s+OF\s+FORECLOSURE\s+SALE", re.IGNORECASE)
 # The county clerk stamps every notice, on filing, with its own standalone
@@ -226,6 +257,25 @@ def extract_lender(block):
     return ""
 
 
+def extract_legal_lot_block(block):
+    """(lot, block_num, subdivision_name_sig) or (None, None, None).
+    subdivision_name_sig is normalized (upper, collapsed whitespace, no
+    trailing punctuation) -- used to disambiguate when a GCAD lot+block
+    query returns more than one candidate (same lot/block numbers reused
+    in a different subdivision elsewhere in the county)."""
+    m = LOT_BLOCK_RE.search(block)
+    if not m:
+        return None, None, None
+    lot = m.group(1).strip().upper()
+    blk = m.group(2).strip().upper()
+    # "BLOCK l" -- a lowercase L misread for "1" on at least one real
+    # notice (confirmed: "LOT 1, BLOCK l, OF LILY SPRINGS, UNIT 2").
+    if blk == "L":
+        blk = "1"
+    subdiv_sig = re.sub(r"\s+", " ", m.group(3)).strip().rstrip(",.")
+    return lot, blk, subdiv_sig
+
+
 def extract_doc_number(block, sale_date, idx):
     m = INSTRUMENT_RE.search(block)
     if m:
@@ -243,6 +293,7 @@ def build_record(block, sale_date, idx):
     loan_m = LOAN_AMT_RE.search(block)
     loan_amount = loan_m.group(1).replace(",", "") if loan_m else ""
     doc_number = extract_doc_number(block, sale_date, idx)
+    legal_lot, legal_block, legal_subdiv = extract_legal_lot_block(block)
 
     flags = ["NEW"]
     if not street:
@@ -289,6 +340,9 @@ def build_record(block, sale_date, idx):
         "stacked": False,
         "score": 8 if street else 4,
         "_addr_source": addr_source,  # diagnostic only, stripped before commit
+        "_legal_lot": legal_lot,  # internal, stripped before commit -- see enrich_from_gcad()
+        "_legal_block": legal_block,
+        "_legal_subdiv": legal_subdiv,
     }
 
 
@@ -330,7 +384,10 @@ def load_known_docs():
 # Fields build_record() actually produces from the PDF text -- safe to
 # backfill into an existing incomplete record. Never touches dashboard-owned
 # fields (ghl_pushed, dash_phone, arv_estimate, on_market*, notes, etc.).
-SCRAPER_OWNED_FIELDS = ["owner", "address", "city", "zip", "lender", "loan_amount"]
+SCRAPER_OWNED_FIELDS = [
+    "owner", "address", "city", "zip", "lender", "loan_amount",
+    "mail_addr", "appraised_value", "prop_id", "deed_date",  # 2026-10-01: GCAD-sourced
+]
 
 
 def record_complete(r):
@@ -347,6 +404,97 @@ def backfill(existing, rec):
             existing[field] = rec[field]
             changed.append(field)
     return changed
+
+
+# ── GCAD parcel enrichment (2026-10-01) ────────────────────────────────────────
+def _gcad_query(where):
+    url = GCAD_PARCELS_URL + "?" + urllib.parse.urlencode({
+        "where": where,
+        "outFields": "file_as_name,legal_desc,tract_or_lot,block,situs_num,"
+                      "situs_street,situs_street_prefx,situs_street_sufix,"
+                      "situs_city,situs_zip,addr_line1,addr_city,addr_state,zip,"
+                      "market,Deed_Date,prop_id",
+        "resultRecordCount": "10",
+        "f": "json",
+    })
+    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+    with urllib.request.urlopen(req, timeout=20) as resp:
+        data = json.loads(resp.read().decode("utf-8"))
+    return [f["attributes"] for f in data.get("features", [])]
+
+
+def _gcad_pick_candidate(candidates, subdiv_sig):
+    """Lot+block alone is usually unique, but not always (same numbers can
+    recur in a different subdivision elsewhere in the county) -- when more
+    than one candidate comes back, prefer one whose legal_desc contains the
+    notice's own subdivision name word(s)."""
+    if len(candidates) == 1:
+        return candidates[0]
+    if not subdiv_sig:
+        return candidates[0]
+    sig_words = [w for w in re.split(r"\s+", subdiv_sig.upper()) if len(w) >= 4]
+    for c in candidates:
+        legal = (c.get("legal_desc") or "").upper()
+        if any(w in legal for w in sig_words):
+            return c
+    return candidates[0]
+
+
+def enrich_from_gcad(records):
+    """Fills address/owner/mail address/value for any record that captured
+    a LOT/BLOCK legal description (see extract_legal_lot_block) but is
+    still missing data -- covers the ~1/3 of notices whose only property
+    identifier is a platted lot/block, not a street address. Metes-and-
+    bounds-only notices (no lot/block at all) aren't covered -- those still
+    need a different approach (abstract/survey matching) if tackled later.
+    """
+    targets = [
+        r for r in records
+        if r.get("_legal_lot") and r.get("_legal_block")
+        and (not r.get("address") or not r.get("owner"))
+    ]
+    hits = 0
+    for rec in targets:
+        lot = rec["_legal_lot"].replace("'", "''")
+        blk = rec["_legal_block"].replace("'", "''")
+        where = f"UPPER(tract_or_lot)='{lot}' AND UPPER(block)='{blk}'"
+        try:
+            candidates = _gcad_query(where)
+        except Exception as e:
+            log.warning(f"  GCAD lookup failed for lot={lot} block={blk}: {e}")
+            continue
+        if not candidates:
+            continue
+        c = _gcad_pick_candidate(candidates, rec.get("_legal_subdiv"))
+
+        if not rec.get("address") and c.get("situs_num") and c.get("situs_street"):
+            parts = [c.get("situs_street_prefx"), c["situs_street"], c.get("situs_street_sufix")]
+            rec["address"] = f"{c['situs_num']} " + " ".join(p for p in parts if p)
+            if c.get("situs_city"):
+                rec["city"] = clean_city(c["situs_city"])
+            if c.get("situs_zip"):
+                rec["zip"] = str(c["situs_zip"])[:5]
+        if not rec.get("owner") and c.get("file_as_name"):
+            rec["owner"] = str(c["file_as_name"]).title()
+        if not rec.get("mail_addr") and c.get("addr_line1"):
+            mail_parts = [c.get("addr_line1"), c.get("addr_city"), c.get("addr_state"), c.get("zip")]
+            rec["mail_addr"] = ", ".join(str(p) for p in mail_parts if p)
+        if not rec.get("appraised_value") and c.get("market"):
+            rec["appraised_value"] = c["market"]
+        if not rec.get("prop_id") and c.get("prop_id"):
+            rec["prop_id"] = c["prop_id"]
+        if not rec.get("deed_date") and c.get("Deed_Date"):
+            rec["deed_date"] = c["Deed_Date"]
+
+        if rec.get("address"):
+            rec["flags"] = [f for f in rec.get("flags", []) if f != "NO ADDRESS - LEGAL DESC ONLY"]
+        if rec.get("owner"):
+            rec["flags"] = [f for f in rec.get("flags", []) if f != "NO OWNER - PARSE MISS"]
+        rec["score"] = 8 if rec.get("address") else rec.get("score", 4)
+        hits += 1
+        time.sleep(0.2)  # light pacing -- live ArcGIS Online service, no need to hammer it
+
+    log.info(f"GCAD enrichment: {hits}/{len(targets)} lot/block lookups matched a parcel")
 
 
 # ── On-market status (ported from nueces-leads 2026-09-25) ────────────────────
@@ -510,6 +658,12 @@ def main():
 
         for idx, block in enumerate(blocks):
             rec = build_record(block, sale_date, idx)
+            # Enrich from GCAD before the dedup/backfill decision below, so
+            # it reaches BOTH brand-new leads and the existing backlog --
+            # backfill() further down copies whatever this fills onto an
+            # already-known record via SCRAPER_OWNED_FIELDS.
+            if rec.get("_legal_lot") and rec.get("_legal_block") and (not rec["address"] or not rec["owner"]):
+                enrich_from_gcad([rec])
             na = norm_addr(rec)
             existing = known_docs.get(rec["doc_number"]) or (known_by_addr.get(na) if na else None)
             if existing is not None:
@@ -544,6 +698,9 @@ def main():
 
     for r in new_records:
         r.pop("_addr_source", None)
+        r.pop("_legal_lot", None)
+        r.pop("_legal_block", None)
+        r.pop("_legal_subdiv", None)
 
     # drop past-sale-date prev records the same way purge_past_leads.py would on next run;
     # just append new ones here, purge runs separately per repo convention.
