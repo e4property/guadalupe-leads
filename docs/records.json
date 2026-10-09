@@ -90,7 +90,7 @@
     "arv_sqft": null,
     "on_market": true,
     "on_market_status": "FOR_RENT",
-    "on_market_checked_at": "2026-10-02T14:01:33Z",
+    "on_market_checked_at": "2026-10-09T19:14:42Z",
     "dash_phone": "210) 275-3624",
     "dash_searched_at": "2026-09-22T17:59:53.274Z",
     "ghl_pushed": true,
@@ -1031,7 +1031,7 @@
     "score": 8,
     "on_market": false,
     "on_market_status": "SOLD",
-    "on_market_checked_at": "2026-10-02T14:01:34Z"
+    "on_market_checked_at": "2026-10-09T19:14:43Z"
   },
   {
     "type": "NOF",
@@ -1115,7 +1115,7 @@
     "score": 8,
     "on_market": false,
     "on_market_status": "SOLD",
-    "on_market_checked_at": "2026-10-02T14:01:36Z"
+    "on_market_checked_at": "2026-10-09T19:14:45Z"
   },
   {
     "type": "NOF",
@@ -1157,7 +1157,7 @@
     "score": 8,
     "on_market": false,
     "on_market_status": "SOLD",
-    "on_market_checked_at": "2026-10-02T14:01:18Z"
+    "on_market_checked_at": "2026-10-09T19:14:46Z"
   },
   {
     "type": "NOF",
@@ -1197,7 +1197,7 @@
     "land_value": "",
     "stacked": false,
     "score": 8,
-    "on_market_checked_at": "2026-10-02T14:01:20Z"
+    "on_market_checked_at": "2026-10-09T19:14:48Z"
   },
   {
     "type": "NOF",
@@ -1238,7 +1238,7 @@
     "land_value": "",
     "stacked": false,
     "score": 8,
-    "on_market_checked_at": "2026-10-02T14:01:22Z"
+    "on_market_checked_at": "2026-10-09T19:14:52Z"
   },
   {
     "type": "NOF",
@@ -1278,7 +1278,7 @@
     "land_value": "",
     "stacked": false,
     "score": 8,
-    "on_market_checked_at": "2026-10-02T14:01:24Z"
+    "on_market_checked_at": "2026-10-09T19:14:53Z"
   },
   {
     "type": "NOF",
@@ -1320,7 +1320,7 @@
     "score": 8,
     "on_market": false,
     "on_market_status": "SOLD",
-    "on_market_checked_at": "2026-10-02T14:01:25Z"
+    "on_market_checked_at": "2026-10-09T19:14:54Z"
   },
   {
     "type": "NOF",
@@ -1441,7 +1441,7 @@
     "land_value": "",
     "stacked": false,
     "score": 8,
-    "on_market_checked_at": "2026-10-02T14:01:27Z"
+    "on_market_checked_at": "2026-10-09T19:14:56Z"
   },
   {
     "type": "NOF",
