@@ -90,7 +90,7 @@
     "arv_sqft": null,
     "on_market": true,
     "on_market_status": "FOR_RENT",
-    "on_market_checked_at": "2026-10-09T19:14:42Z",
+    "on_market_checked_at": "2026-10-17T14:19:05Z",
     "dash_phone": "210) 275-3624",
     "dash_searched_at": "2026-09-22T17:59:53.274Z",
     "ghl_pushed": true,
@@ -972,7 +972,7 @@
       "NO OWNER - PARSE MISS"
     ],
     "doc_number": "GDL-20270105-000",
-    "lender": "",
+    "lender": "Cypress Waters Blvd., Coppell, TX 75019",
     "loan_amount": "3330.89",
     "loan_date": "",
     "trustee": "",
@@ -1031,7 +1031,7 @@
     "score": 8,
     "on_market": false,
     "on_market_status": "SOLD",
-    "on_market_checked_at": "2026-10-09T19:14:43Z"
+    "on_market_checked_at": "2026-10-17T14:19:06Z"
   },
   {
     "type": "NOF",
@@ -1115,7 +1115,7 @@
     "score": 8,
     "on_market": false,
     "on_market_status": "SOLD",
-    "on_market_checked_at": "2026-10-09T19:14:45Z"
+    "on_market_checked_at": "2026-10-17T14:19:08Z"
   },
   {
     "type": "NOF",
@@ -1157,7 +1157,7 @@
     "score": 8,
     "on_market": false,
     "on_market_status": "SOLD",
-    "on_market_checked_at": "2026-10-09T19:14:46Z"
+    "on_market_checked_at": "2026-10-17T14:19:10Z"
   },
   {
     "type": "NOF",
@@ -1197,7 +1197,7 @@
     "land_value": "",
     "stacked": false,
     "score": 8,
-    "on_market_checked_at": "2026-10-09T19:14:48Z"
+    "on_market_checked_at": "2026-10-17T14:19:12Z"
   },
   {
     "type": "NOF",
@@ -1238,7 +1238,7 @@
     "land_value": "",
     "stacked": false,
     "score": 8,
-    "on_market_checked_at": "2026-10-09T19:14:52Z"
+    "on_market_checked_at": "2026-10-17T14:19:15Z"
   },
   {
     "type": "NOF",
@@ -1278,7 +1278,7 @@
     "land_value": "",
     "stacked": false,
     "score": 8,
-    "on_market_checked_at": "2026-10-09T19:14:53Z"
+    "on_market_checked_at": "2026-10-17T14:19:16Z"
   },
   {
     "type": "NOF",
@@ -1320,7 +1320,7 @@
     "score": 8,
     "on_market": false,
     "on_market_status": "SOLD",
-    "on_market_checked_at": "2026-10-09T19:14:54Z"
+    "on_market_checked_at": "2026-10-17T14:19:18Z"
   },
   {
     "type": "NOF",
@@ -1441,7 +1441,7 @@
     "land_value": "",
     "stacked": false,
     "score": 8,
-    "on_market_checked_at": "2026-10-09T19:14:56Z"
+    "on_market_checked_at": "2026-10-17T14:19:19Z"
   },
   {
     "type": "NOF",
@@ -2390,5 +2390,175 @@
     "land_value": "",
     "stacked": false,
     "score": 4
+  },
+  {
+    "type": "NOF",
+    "source": "guadalupe_pdf",
+    "county": "guadalupe",
+    "owner": "Stitham Rhea Sharae",
+    "address": "8916 James Bowie",
+    "mail_addr": "",
+    "city": "SEGUIN",
+    "zip": "78155",
+    "school_dist": "",
+    "date_filed": "",
+    "sale_date": "12/01/2026",
+    "days_until_sale": 45,
+    "run_ts": "2026-10-17T14:18:20Z",
+    "is_new": true,
+    "duplicate": false,
+    "absentee": false,
+    "flags": [
+      "NEW"
+    ],
+    "doc_number": "202399025136",
+    "lender": "of the promissory note. MIDFIRST BANK",
+    "loan_amount": "291619.00",
+    "loan_date": "",
+    "trustee": "",
+    "sale_date_arcgis": "",
+    "tenure_years": null,
+    "tenure_score_bonus": 0,
+    "prop_id": 170537,
+    "deed_date": "07/14/2020",
+    "last_sale_amt": "",
+    "appr_history": [],
+    "appr_trend": "",
+    "appraised_value": 386716,
+    "annual_taxes": "",
+    "land_value": "",
+    "stacked": false,
+    "score": 8,
+    "on_market": false,
+    "on_market_status": "SOLD",
+    "on_market_checked_at": "2026-10-17T14:18:57Z"
+  },
+  {
+    "type": "NOF",
+    "source": "guadalupe_pdf",
+    "county": "guadalupe",
+    "owner": "",
+    "address": "3521 IRISH CREEK RD",
+    "mail_addr": "",
+    "city": "SCHERTZ",
+    "zip": "78154",
+    "school_dist": "",
+    "date_filed": "",
+    "sale_date": "12/01/2026",
+    "days_until_sale": 45,
+    "run_ts": "2026-10-17T14:18:20Z",
+    "is_new": true,
+    "duplicate": false,
+    "absentee": false,
+    "flags": [
+      "NEW",
+      "NO OWNER - PARSE MISS"
+    ],
+    "doc_number": "202699001611",
+    "lender": "",
+    "loan_amount": "243915.00",
+    "loan_date": "",
+    "trustee": "",
+    "sale_date_arcgis": "",
+    "tenure_years": null,
+    "tenure_score_bonus": 0,
+    "prop_id": "",
+    "deed_date": "",
+    "last_sale_amt": "",
+    "appr_history": [],
+    "appr_trend": "",
+    "appraised_value": "",
+    "annual_taxes": "",
+    "land_value": "",
+    "stacked": false,
+    "score": 8,
+    "on_market": false,
+    "on_market_status": "SOLD",
+    "on_market_checked_at": "2026-10-17T14:18:58Z"
+  },
+  {
+    "type": "NOF",
+    "source": "guadalupe_pdf",
+    "county": "guadalupe",
+    "owner": "Tpg Ag Ehc Iii Multi State 4 Llc",
+    "address": "3409 YAW WAY",
+    "mail_addr": "C/O ESSENTIAL HOUSING ASSET MNGMT LLC, SAN ANTONIO, TX, 78216",
+    "city": "",
+    "zip": "",
+    "school_dist": "",
+    "date_filed": "",
+    "sale_date": "01/05/2027",
+    "days_until_sale": 80,
+    "run_ts": "2026-10-17T14:18:20Z",
+    "is_new": true,
+    "duplicate": false,
+    "absentee": false,
+    "flags": [
+      "NEW"
+    ],
+    "doc_number": "202299002085",
+    "lender": "",
+    "loan_amount": "",
+    "loan_date": "",
+    "trustee": "",
+    "sale_date_arcgis": "",
+    "tenure_years": null,
+    "tenure_score_bonus": 0,
+    "prop_id": 227935,
+    "deed_date": "11/21/2024",
+    "last_sale_amt": "",
+    "appr_history": [],
+    "appr_trend": "",
+    "appraised_value": 30013,
+    "annual_taxes": "",
+    "land_value": "",
+    "stacked": false,
+    "score": 8,
+    "on_market": true,
+    "on_market_status": "FOR_SALE",
+    "on_market_checked_at": "2026-10-17T14:19:00Z"
+  },
+  {
+    "type": "NOF",
+    "source": "guadalupe_pdf",
+    "county": "guadalupe",
+    "owner": "",
+    "address": "133 Broward Ave",
+    "mail_addr": "",
+    "city": "MARION",
+    "zip": "78124",
+    "school_dist": "",
+    "date_filed": "",
+    "sale_date": "01/05/2027",
+    "days_until_sale": 80,
+    "run_ts": "2026-10-17T14:18:20Z",
+    "is_new": true,
+    "duplicate": false,
+    "absentee": false,
+    "flags": [
+      "NEW",
+      "NO OWNER - PARSE MISS"
+    ],
+    "doc_number": "202199022716",
+    "lender": "Mortgage Services, LLC",
+    "loan_amount": "",
+    "loan_date": "",
+    "trustee": "",
+    "sale_date_arcgis": "",
+    "tenure_years": null,
+    "tenure_score_bonus": 0,
+    "prop_id": "",
+    "deed_date": "",
+    "last_sale_amt": "",
+    "appr_history": [],
+    "appr_trend": "",
+    "appraised_value": "",
+    "annual_taxes": "",
+    "land_value": "",
+    "stacked": false,
+    "score": 8,
+    "on_market": false,
+    "on_market_status": "OFF_MARKET",
+    "on_market_checked_at": "2026-10-17T14:19:01Z"
   }
 ]
