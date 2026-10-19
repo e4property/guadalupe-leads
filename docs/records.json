@@ -142,7 +142,7 @@
     "arv_sqft": 2652,
     "on_market": false,
     "on_market_status": "SOLD",
-    "on_market_checked_at": "2026-10-11T04:21:40Z"
+    "on_market_checked_at": "2026-10-19T13:40:06Z"
   },
   {
     "type": "NOF",
@@ -189,7 +189,7 @@
     "arv_sqft": 1574,
     "on_market": false,
     "on_market_status": "OFF_MARKET",
-    "on_market_checked_at": "2026-10-11T04:21:41Z"
+    "on_market_checked_at": "2026-10-19T13:40:08Z"
   },
   {
     "type": "NOF",
@@ -236,7 +236,7 @@
     "arv_sqft": 1687,
     "on_market": true,
     "on_market_status": "FOR_SALE",
-    "on_market_checked_at": "2026-10-11T04:21:43Z"
+    "on_market_checked_at": "2026-10-19T13:40:09Z"
   },
   {
     "type": "NOF",
@@ -283,7 +283,7 @@
     "arv_sqft": 2402,
     "on_market": false,
     "on_market_status": "OFF_MARKET",
-    "on_market_checked_at": "2026-10-11T04:21:44Z"
+    "on_market_checked_at": "2026-10-19T13:40:11Z"
   },
   {
     "type": "NOF",
@@ -329,7 +329,7 @@
     "arv_sqft": "",
     "on_market": true,
     "on_market_status": "FOR_RENT",
-    "on_market_checked_at": "2026-10-11T04:21:48Z",
+    "on_market_checked_at": "2026-10-19T13:40:14Z",
     "ghl_pushed": false,
     "ghl_pushed_at": "",
     "ghl_id": "",
@@ -379,7 +379,7 @@
     "arv_sqft": 2245,
     "on_market": false,
     "on_market_status": "SOLD",
-    "on_market_checked_at": "2026-10-11T04:21:50Z",
+    "on_market_checked_at": "2026-10-19T13:40:16Z",
     "ghl_pushed": false,
     "ghl_pushed_at": "",
     "ghl_id": "",
@@ -429,7 +429,7 @@
     "arv_sqft": "",
     "on_market": false,
     "on_market_status": "OFF_MARKET",
-    "on_market_checked_at": "2026-10-11T04:21:52Z",
+    "on_market_checked_at": "2026-10-19T13:40:18Z",
     "ghl_pushed": false,
     "ghl_pushed_at": "",
     "ghl_id": "",
@@ -479,7 +479,7 @@
     "arv_sqft": 1089,
     "on_market": false,
     "on_market_status": "SOLD",
-    "on_market_checked_at": "2026-10-11T04:21:53Z",
+    "on_market_checked_at": "2026-10-19T13:40:19Z",
     "ghl_pushed": false,
     "ghl_pushed_at": "",
     "ghl_id": "",
