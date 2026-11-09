@@ -898,7 +898,7 @@
     "score": 8,
     "on_market": false,
     "on_market_status": "SOLD",
-    "on_market_checked_at": "2026-11-02T21:59:25Z",
+    "on_market_checked_at": "2026-11-09T23:16:47Z",
     "arv_estimate": 179200,
     "arv_status": "SOLD",
     "arv_sqft": 1056
@@ -1025,7 +1025,7 @@
     "score": 8,
     "on_market": false,
     "on_market_status": "SOLD",
-    "on_market_checked_at": "2026-11-02T21:59:27Z",
+    "on_market_checked_at": "2026-11-09T23:16:48Z",
     "arv_estimate": 291000,
     "arv_status": "SOLD",
     "arv_sqft": 2356
@@ -1071,7 +1071,7 @@
     "score": 8,
     "on_market": false,
     "on_market_status": "SOLD",
-    "on_market_checked_at": "2026-11-02T21:59:28Z",
+    "on_market_checked_at": "2026-11-09T23:16:50Z",
     "arv_estimate": 370300,
     "arv_status": "SOLD",
     "arv_sqft": 2733
@@ -1116,7 +1116,7 @@
     "score": 8,
     "on_market": true,
     "on_market_status": "FOR_SALE",
-    "on_market_checked_at": "2026-11-02T21:59:29Z",
+    "on_market_checked_at": "2026-11-09T23:16:51Z",
     "arv_estimate": 219499,
     "arv_status": "FOR_SALE",
     "arv_sqft": 1483
@@ -1204,7 +1204,7 @@
     "score": 8,
     "on_market": true,
     "on_market_status": "FOR_SALE",
-    "on_market_checked_at": "2026-11-02T15:57:38Z"
+    "on_market_checked_at": "2026-11-09T23:16:53Z"
   },
   {
     "type": "NOF",
@@ -1245,7 +1245,7 @@
     "land_value": "",
     "stacked": false,
     "score": 8,
-    "on_market_checked_at": "2026-11-02T15:57:40Z"
+    "on_market_checked_at": "2026-11-09T23:16:55Z"
   },
   {
     "type": "NOF",
@@ -1288,7 +1288,7 @@
     "score": 8,
     "on_market": false,
     "on_market_status": "SOLD",
-    "on_market_checked_at": "2026-11-02T15:57:42Z"
+    "on_market_checked_at": "2026-11-09T23:16:57Z"
   },
   {
     "type": "NOF",
@@ -1330,7 +1330,7 @@
     "score": 8,
     "on_market": false,
     "on_market_status": "SOLD",
-    "on_market_checked_at": "2026-11-02T18:34:41Z"
+    "on_market_checked_at": "2026-11-09T23:16:58Z"
   },
   {
     "type": "NOF",
@@ -1495,7 +1495,7 @@
     "score": 8,
     "on_market": false,
     "on_market_status": "SOLD",
-    "on_market_checked_at": "2026-11-02T18:34:42Z"
+    "on_market_checked_at": "2026-11-09T23:17:00Z"
   },
   {
     "type": "NOF",
@@ -1577,7 +1577,7 @@
     "score": 8,
     "on_market": false,
     "on_market_status": "SOLD",
-    "on_market_checked_at": "2026-11-02T18:34:44Z"
+    "on_market_checked_at": "2026-11-09T23:17:01Z"
   },
   {
     "type": "NOF",
