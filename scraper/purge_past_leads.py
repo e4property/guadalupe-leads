@@ -48,7 +48,7 @@ def parse_date(s):
 
 
 def has_ghl_activity(rec):
-    return bool(rec.get("dash_phone") or rec.get("ghl_pushed"))
+    return bool(rec.get("dash_phone") or rec.get("dash_has_phone") or rec.get("ghl_pushed"))
 
 
 def should_purge(rec):

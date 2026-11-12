@@ -712,6 +712,14 @@ def main():
     except Exception as e:
         log.warning(f"On-market status error: {e}")
 
+    # 2026-11-12 privacy: phones, notes and lookup dates live ONLY in the private repo
+    # (e4property/e4-leads-private). Never publish them; public records get dash_has_phone only.
+    for _r in all_records:
+        if _r.get("dash_phone"):
+            _r["dash_has_phone"] = True
+        for _k in ("dash_phone", "dash_notes", "dash_searched_at"):
+            _r.pop(_k, None)
+
     RECORDS_PATH.write_text(json.dumps(all_records, indent=2), encoding="utf-8")
     print(f"new={len(new_records)} backfilled={backfilled}")
 
