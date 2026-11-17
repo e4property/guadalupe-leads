@@ -127,7 +127,7 @@
     "land_value": "",
     "stacked": false,
     "score": 8,
-    "on_market_checked_at": "2026-11-10T20:42:25Z",
+    "on_market_checked_at": "2026-11-17T22:00:43Z",
     "ghl_pushed": true,
     "ghl_pushed_at": "2026-09-22T17:56:44.860Z",
     "ghl_id": "s3JvyRV1vOAlbuV1Elnj",
@@ -215,7 +215,7 @@
     "score": 8,
     "on_market": true,
     "on_market_status": "FOR_RENT",
-    "on_market_checked_at": "2026-11-10T20:42:27Z",
+    "on_market_checked_at": "2026-11-17T22:00:45Z",
     "arv_estimate": 260000,
     "arv_status": "FOR_RENT",
     "arv_sqft": 1170
@@ -1163,7 +1163,7 @@
     "score": 8,
     "on_market": false,
     "on_market_status": "OFF_MARKET",
-    "on_market_checked_at": "2026-11-10T20:42:28Z"
+    "on_market_checked_at": "2026-11-17T22:00:46Z"
   },
   {
     "type": "NOF",
@@ -2456,7 +2456,7 @@
     "score": 4,
     "on_market": true,
     "on_market_status": "FOR_SALE",
-    "on_market_checked_at": "2026-11-10T20:42:18Z"
+    "on_market_checked_at": "2026-11-17T22:00:48Z"
   },
   {
     "type": "NOF",
@@ -2540,7 +2540,7 @@
     "score": 8,
     "on_market": true,
     "on_market_status": "FOR_SALE",
-    "on_market_checked_at": "2026-11-10T20:42:19Z"
+    "on_market_checked_at": "2026-11-17T22:00:49Z"
   },
   {
     "type": "NOF",
@@ -2582,7 +2582,7 @@
     "score": 8,
     "on_market": true,
     "on_market_status": "FOR_SALE",
-    "on_market_checked_at": "2026-11-10T20:42:21Z"
+    "on_market_checked_at": "2026-11-17T22:00:51Z"
   },
   {
     "type": "NOF",
@@ -2625,7 +2625,7 @@
     "score": 8,
     "on_market": false,
     "on_market_status": "SOLD",
-    "on_market_checked_at": "2026-11-10T20:42:22Z"
+    "on_market_checked_at": "2026-11-17T22:00:52Z"
   },
   {
     "type": "NOF",
@@ -2789,7 +2789,7 @@
     "score": 8,
     "on_market": false,
     "on_market_status": "SOLD",
-    "on_market_checked_at": "2026-11-10T20:42:24Z"
+    "on_market_checked_at": "2026-11-17T22:00:54Z"
   },
   {
     "type": "NOF",
