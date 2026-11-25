@@ -2832,7 +2832,7 @@
     "score": 8,
     "on_market": false,
     "on_market_status": "SOLD",
-    "on_market_checked_at": "2026-11-18T20:04:33Z"
+    "on_market_checked_at": "2026-11-25T23:08:08Z"
   },
   {
     "type": "NOF",
@@ -2874,7 +2874,7 @@
     "score": 8,
     "on_market": false,
     "on_market_status": "SOLD",
-    "on_market_checked_at": "2026-11-18T20:04:35Z"
+    "on_market_checked_at": "2026-11-25T23:08:10Z"
   },
   {
     "type": "NOF",
@@ -3480,6 +3480,47 @@
       "NO OWNER - PARSE MISS"
     ],
     "doc_number": "202499023431",
+    "lender": "",
+    "loan_amount": "",
+    "loan_date": "",
+    "trustee": "",
+    "sale_date_arcgis": "",
+    "tenure_years": null,
+    "tenure_score_bonus": 0,
+    "prop_id": "",
+    "deed_date": "",
+    "last_sale_amt": "",
+    "appr_history": [],
+    "appr_trend": "",
+    "appraised_value": "",
+    "annual_taxes": "",
+    "land_value": "",
+    "stacked": false,
+    "score": 4
+  },
+  {
+    "type": "NOF",
+    "source": "guadalupe_pdf",
+    "county": "guadalupe",
+    "owner": "",
+    "address": "",
+    "mail_addr": "",
+    "city": "",
+    "zip": "",
+    "school_dist": "",
+    "date_filed": "",
+    "sale_date": "02/02/2027",
+    "days_until_sale": 69,
+    "run_ts": "2026-11-25T23:07:25Z",
+    "is_new": true,
+    "duplicate": false,
+    "absentee": false,
+    "flags": [
+      "NEW",
+      "NO ADDRESS - LEGAL DESC ONLY",
+      "NO OWNER - PARSE MISS"
+    ],
+    "doc_number": "GDL-20270202-002",
     "lender": "",
     "loan_amount": "",
     "loan_date": "",
